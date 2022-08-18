@@ -1,52 +1,97 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>I-Frame Testing</title>
-</head>
-<body>
-<iframe id="iframe" allow="camera" src=""></iframe>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>I-Frame Testing</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    </head>
 
-<div class="controls">
-    <div class="item">
-        <label>url</label>
-        <input id="url">
-    </div>
-</div>
+    <body>
+        <div class="container mt-4">
 
-<style>
-    iframe {
-        width: 100%;
-        height: 700px;
-    }
-    .controls {
-        width: 100%;
-    }
-    .item label {
-        display: inline-block;
-        width: 100px;
+            <!-- URL Input-->
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"
+                          id="basic-addon1">
+                        Url
+                    </span>
+                </div>
+                <input type="text"
+                       id="url"
+                       class="form-control"
+                       placeholder="https://www.url.com"
+                       aria-label="Username"
+                       aria-describedby="basic-addon1">
+            </div>
 
-    }
-    .item input {
-        width: calc(100% - 120px);
-    }
-</style>
-<script>
-    document.body.onload = setup;
-    let iframe;
-    let url;
+            <!-- Permissions Input-->
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"
+                          id="basic-addon2">
+                        Permissions
+                    </span>
+                </div>
+                <div class="form-control">
 
-    function setup() {
-        iframe = document.getElementById("iframe");
-        url = document.getElementById("url");
-        url.onblur = updateUrl;
-    }
+                    <!-- Camera Permission -->
+                    <div class="form-check">
+                        <input class="form-check-inline"
+                               type="checkbox"
+                               value=""
+                               checked
+                               id="cameraPermission">
+                        <label class="form-check-label"
+                               for="cameraPermission">
+                            Camera
+                        </label>
+                    </div>
+                </div>
+            </div>
 
-    function updateUrl() {
-        iframe.src = url.value;
-    }
+            <!-- Update Button -->
+            <button type="button"
+                    id="update"
+                    class="btn btn-success btn-lg btn-block mb-3">
+                Update iFrame
+            </button>
 
-</script>
-</body>
+            <!-- iFrame -->
+            <iframe id="iframe"
+                    frameBorder="0"
+                    allow="camera"
+                    src="">
+            </iframe>
+        </div>
 
+        <style>
+            iframe {
+                width: 100%;
+                height: 700px;
+            }
+        </style>
+
+        <script>
+            document.body.onload = setup;
+            let iframe;
+            let url;
+            let cameraPermission;
+            let update;
+
+            function setup() {
+                iframe = document.getElementById("iframe");
+                url = document.getElementById("url");
+                cameraPermission = document.getElementById("cameraPermission");
+                update = document.getElementById("update");
+                update.onclick = updateIFrame;
+            }
+
+            function updateIFrame() {
+                iframe.allow = cameraPermission.checked ? 'camera' : '';
+                iframe.src = url.value;
+            }
+
+        </script>
+    </body>
 </html>
