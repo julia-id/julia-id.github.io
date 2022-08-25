@@ -87,6 +87,9 @@
                 position: fixed;
                 bottom: 0px;
             }
+            .hide {
+                display: none;
+            }
         </style>
 
         <script>
@@ -116,8 +119,10 @@
                 document.getElementById("alertMessage").innerHTML = event.data;
                 document.getElementById("alertOrigin").innerHTML = event.origin;
                 document.getElementById("postMessage").classList.add("show");
+                document.getElementById("postMessage").classList.remove("hide");
                 setTimeout(function() {
                     document.getElementById("postMessage").classList.remove("show");
+                    document.getElementById("postMessage").classList.add("hide");
                 }, 6000)
             }
 
